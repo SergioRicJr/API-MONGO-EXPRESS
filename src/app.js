@@ -33,6 +33,13 @@ app.put("/livros/:id", (req, res)=>{ // :id para indicar que esse parametro vai 
     res.status(200).json(livros)// o default é status 200
 })
 
+app.delete("/livros/:id", (req, res)=>{ //o mesmo que req.params.id
+    let {id} = req.params   //atribuição via desetruturação -- atribuir a outra variavel valor retirado de array ou objeto(como a requisicao)
+    let index = buscaLivro(id)  
+    livros.splice(index,1)
+    res.json(`Livro ${id} removido com sucesso`)
+})
+
 function buscaLivro(id) {
     return livros.findIndex((livro) => livro.id == id) //pede uma funcao para comparar oq é aquele elemento
 } //para cada item na funcao vai chamar de livro e ver se bate com o id inserido
